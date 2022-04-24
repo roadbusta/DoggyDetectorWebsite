@@ -2,3 +2,7 @@ streamlit
 datetime
 requests
 setuptools
+google.cloud
+os
+pil
+io
