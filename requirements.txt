@@ -3,6 +3,5 @@ datetime
 requests
 setuptools
 google.cloud
-
-pil
+PIL
 io
