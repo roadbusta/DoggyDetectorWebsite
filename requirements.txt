@@ -3,5 +3,5 @@ datetime
 requests
 setuptools
 google.cloud
-PIL
+pillow
 io
