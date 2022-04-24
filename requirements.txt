@@ -4,4 +4,3 @@ requests
 setuptools
 google.cloud
 pillow
-io
