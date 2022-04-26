@@ -5,7 +5,7 @@ from google.cloud import storage
 import os
 from PIL import Image
 '''
-# Doggy Detector
+# Doggy Breed Detector
 '''
 ##
 
@@ -52,6 +52,6 @@ if image_file is not None:
     blob.upload_from_filename("test.jpg")
 
     #Make prediction
-    st.markdown(f'''
+    st.markdown(f''' This is a
     {breed()}
     ''')
