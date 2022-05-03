@@ -50,8 +50,14 @@ if image_file is not None:
     client = storage.Client().bucket(BUCKET_NAME)
     blob = client.blob(BUCKET_DESTINATION)
     blob.upload_from_filename("test.jpg")
+    st.markdown("I'm thinking...")
 
     #Make prediction
-    st.markdown(f''' This is a
-    {breed()}
-    ''')
+    prediction = breed()
+    prediction_1 = prediction[0]
+    prediction_2 = prediction[1]
+
+    if prediction_1[0] > 0.85:
+        st.markdown(f"This is a {prediction_1[1]}")
+    else:
+        st.markdown(f"This looks like it might be a {prediction_1[1]} or a {prediction_2[1]}")
