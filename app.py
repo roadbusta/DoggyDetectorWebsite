@@ -45,6 +45,7 @@ image_file = st.file_uploader("Upload Images", type = ["png","jpg","jpeg"])
 
 if image_file is not None:
     st.image(load_image(image_file))
+    st.markdown("I'm thinking...")
 
     #Upload to google cloud
     client = storage.Client().bucket(BUCKET_NAME)
