@@ -54,7 +54,7 @@ if image_file is not None:
 
 
     #Make prediction
-    prediction = breed()[0][0]
+    prediction = breed()[0]
     prediction_1 = prediction[0]
     prediction_2 = prediction[1]
 
