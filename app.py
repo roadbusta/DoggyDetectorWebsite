@@ -41,11 +41,16 @@ def load_image(image_file):
     return img
 
 
+st.markdown("Upload File")
 image_file = st.file_uploader("Upload Images", type = ["png","jpg","jpeg"])
 
+st.markdown("or Take a Picture")
+picture = st.camera_input("Take a picture")
+
 if image_file is not None:
-    st.markdown("I'm thinking...")
+
     st.image(load_image(image_file))
+    st.markdown("I'm thinking...")
 
 
     #Upload to google cloud
@@ -63,3 +68,26 @@ if image_file is not None:
         st.markdown(f"This is a {prediction_1[1]}")
     else:
         st.markdown(f"This looks like it might be a {prediction_1[1]} or a {prediction_2[1]}")
+
+
+if picture is not None:
+
+    st.image(load_image(picture))
+    st.markdown("I'm thinking...")
+
+    #Upload to google cloud
+    client = storage.Client().bucket(BUCKET_NAME)
+    blob = client.blob(BUCKET_DESTINATION)
+    blob.upload_from_filename("test.jpg")
+
+    #Make prediction
+    prediction = breed()
+    prediction_1 = prediction[0]
+    prediction_2 = prediction[1]
+
+    if prediction_1[0] > 0.85:
+        st.markdown(f"This is a {prediction_1[1]}")
+    else:
+        st.markdown(
+            f"This looks like it might be a {prediction_1[1]} or a {prediction_2[1]}"
+        )
