@@ -44,8 +44,6 @@ def load_image(image_file):
 st.markdown("Upload File")
 image_file = st.file_uploader("Upload Images", type = ["png","jpg","jpeg"])
 
-st.markdown("or Take a Picture")
-picture = st.camera_input("Take a picture")
 
 if image_file is not None:
 
