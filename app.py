@@ -51,10 +51,10 @@ if image_file is not None:
     client = storage.Client().bucket(BUCKET_NAME)
     blob = client.blob(BUCKET_DESTINATION)
     blob.upload_from_filename("test.jpg")
-    st.markdown("I'm thinking...")
+
 
     #Make prediction
-    prediction = breed()
+    prediction = breed()[0]
     prediction_1 = prediction[0]
     prediction_2 = prediction[1]
 
