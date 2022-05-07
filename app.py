@@ -42,10 +42,10 @@ def load_image(image_file):
 
 
 image_file = st.file_uploader("Upload Images", type = ["png","jpg","jpeg"])
-
+st.markdown("I'm thinking...")
 if image_file is not None:
     st.image(load_image(image_file))
-    st.markdown("I'm thinking...")
+
 
     #Upload to google cloud
     client = storage.Client().bucket(BUCKET_NAME)
@@ -54,7 +54,7 @@ if image_file is not None:
 
 
     #Make prediction
-    prediction = breed()[0]
+    prediction = breed()[0][0]
     prediction_1 = prediction[0]
     prediction_2 = prediction[1]
 
