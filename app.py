@@ -9,22 +9,8 @@ from PIL import Image
 '''
 ##
 
-# '''
-# Predicted dog Breed
-# '''
-
-def breed():
-    url = "https://doggy-detector-2022-image-q34gthac5q-ts.a.run.app/predict?BUCKET_NAME=doggy-detector-2022-bucket-v2&BLOB_NAME=test_images/test"
-
-    response = requests.get(url).json()
-
-    return response['prediction']
 
 
-
-
-# Take a photo
-# st.camera_input(label, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False)
 
 #Google cloud credentials
 os.environ[
@@ -32,7 +18,24 @@ os.environ[
 BUCKET_NAME = "doggy-detector-2022-bucket-v2"
 BUCKET_DESTINATION = "test_images/test"
 
+
+# '''
+# Define relevant functions
+# '''
+def breed():
+    """
+    Access the api and returns the prediction dictionary containing the top two predicted breeds and their associated likelihoods
+    """
+    url = f"https://doggy-detector-2022-image-q34gthac5q-ts.a.run.app/predict?BUCKET_NAME={BUCKET_NAME}&BLOB_NAME={BUCKET_DESTINATION}"
+
+    response = requests.get(url).json()
+    return response['prediction']
+
 def load_image(image_file):
+    """
+    Takes the image and opens it as an image file.
+    It then saves the image as 'test.jpg'
+    """
     img = Image.open(image_file)
     if img.mode in ("RGBA", "P"):
         img = img.convert("RGB")
@@ -40,7 +43,7 @@ def load_image(image_file):
     img.save("test.jpg")
     return img
 
-
+#Allow image to be uploaded
 st.markdown("Upload File")
 image_file = st.file_uploader("Upload Images", type = ["png","jpg","jpeg"])
 
@@ -63,6 +66,6 @@ if image_file is not None:
     prediction_2 = prediction[1]
 
     if prediction_1[0] > 0.85:
-        st.markdown(f"This is a {prediction_1[1]}")
+        st.markdown(f"This is a {prediction_1[1]}") # Return a single prediction where prediction score is high
     else:
-        st.markdown(f"This looks like it might be a {prediction_1[1]} or a {prediction_2[1]}")
+        st.markdown(f"This looks like it might be a {prediction_1[1]} or a {prediction_2[1]}") # Return multiple predictions where prediction score is not high
